@@ -1,33 +1,30 @@
 import React from 'react';
-import { createStore } from "redux"
+import { createStore, combineReducers } from "redux"
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { userReducer } from "./reducers/todolistReduserces";
+import { Provider } from "react-redux";
 
-const reducer = function (state, action) {
-    var { type , payload } = action;
-    switch(type) {
-      case "INC":
-          return state + payload
-        break;
-      case "DEC":
-          return state - payload;
-        break;
-    }
-    return state;
-}
+const reducers = combineReducers({
+  user: userReducer
+})
 
-const store = createStore(reducer, 0);
+const store = createStore(reducers);
 
 store.subscribe(() => {
   console.log("store change", store.getState())
 });
 
-store.dispatch({type: "INC", payload: 1});
+store.dispatch({type: "USER_LOGIN_PANDDING", payload: "hi"});
 store.dispatch({type: "INC", payload: 1});
 store.dispatch({type: "INC", payload: 1});
 store.dispatch({type: "DEC", payload: 2});
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
+ReactDOM.render(
+        <Provider store={store}>
+          <App />
+        </Provider>
+  , document.getElementById('root'));
+registerServiceWorker();
