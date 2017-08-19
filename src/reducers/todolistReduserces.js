@@ -29,8 +29,31 @@ export const todoReducer = function (state = {}, action) {
         break;
       case "TODO_FATCH_REJECTED":
         state = {...state, todos: [], loading: false};
-        breakl
-
+        break;
+      case "TODO_CREATE_PANDING":
+        state = {...state, loading: true};
+        break;
+      case "TODO_CREATE_FULFILLED":
+        var { payload } = action;
+        state = {...state, loading: false};
+        state.todos.push(payload);
+        break;
+      case "TODO_CREATE_REJECTED":
+        var { payload } = state;
+        state = {...state, loading: false, error: payload }
+        break;
+      case "TODO_SET_PANDING":
+        state = {...state, loading: true }
+        break;
+      case "TODO_SET_FULFILLED":
+        var { payload } = action
+        state = {...state, loading: false}
+        state.todos.push(payload);
+        break;
+      case "TODO_SET_REJECTED":
+        var { payload } = action;
+        state = {...state, loading: false, error: payload };
+        break;
     }
     return state;
 }

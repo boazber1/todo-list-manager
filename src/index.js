@@ -8,7 +8,7 @@ import { userReducer, todoReducer } from "./reducers/todolistReduserces";
 import { Provider } from "react-redux";
 
 const reducers = combineReducers({
-  user: userReducer
+  user: userReducer,
   todoList: todoReducer
 })
 
