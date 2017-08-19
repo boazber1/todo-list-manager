@@ -6,6 +6,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { userReducer, todoReducer } from "./reducers/todolistReduserces";
 import { Provider } from "react-redux";
+import {fatchTodos , createTodos, deleteTodos} from "./tests/testRedusers"
 
 const reducers = combineReducers({
   user: userReducer,
@@ -17,6 +18,11 @@ const store = createStore(reducers);
 store.subscribe(() => {
   console.log("store change", store.getState())
 });
+//  Test
+// fatchTodos(store);
+// createTodos(store);
+// deleteTodos(store);
+
 
 ReactDOM.render(
         <Provider store={store}>
