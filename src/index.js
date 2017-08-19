@@ -13,7 +13,7 @@ import promise from "redux-promise-middleware"
 
 const reducers = combineReducers({
   user: userReducer,
-  todoList: todoReducer
+  todosState: todoReducer
 })
 
 const middleware = applyMiddleware(promise() ,thunk ,logger);
