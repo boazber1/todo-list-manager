@@ -18,7 +18,7 @@ class Login extends React.Component {
       password: this.password
     };
     console.log(data);
-    this.props.dispatch(login(data))
+    this.props.dispatch(login(data));
   }
 
   onEmailChange(e) {
