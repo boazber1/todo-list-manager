@@ -2,7 +2,7 @@ export const userReducer = function (state = {}, action) {
     var { type } = action;
 
     switch (type) {
-      case "USER_LOGIN_PANDING":
+      case "USER_LOGIN_PENDING":
         state = {...state, loading: true};
         break;
       case "USER_LOGIN_FULFILLED":
@@ -20,7 +20,7 @@ export const userReducer = function (state = {}, action) {
 export const todoReducer = function (state = {}, action) {
     var { type } = action;
     switch (type) {
-      case "TODO_FATCH_PANDING":
+      case "TODO_FATCH_PENDING":
         state = {...state, loading: true}
         break;
       case "TODO_FATCH_FULFILLED":
@@ -30,7 +30,7 @@ export const todoReducer = function (state = {}, action) {
       case "TODO_FATCH_REJECTED":
         state = {...state, todos: [], loading: false};
         break;
-      case "TODO_CREATE_PANDING":
+      case "TODO_CREATE_PENDING":
         state = {...state, loading: true};
         break;
       case "TODO_CREATE_FULFILLED":
@@ -42,7 +42,7 @@ export const todoReducer = function (state = {}, action) {
         var { payload } = state;
         state = {...state, loading: false, error: payload }
         break;
-      case "TODO_SET_PANDING":
+      case "TODO_SET_PENDING":
         state = {...state, loading: true }
         break;
       case "TODO_SET_FULFILLED":
@@ -54,7 +54,7 @@ export const todoReducer = function (state = {}, action) {
         var { payload } = action;
         state = {...state, loading: false, error: payload };
         break;
-      case "TODO_DELETE_PANDING":
+      case "TODO_DELETE_PENDING":
         state = {...state, loading: true};
         break;
       case "TODO_DELETE_FULFILLED":
