@@ -19,13 +19,14 @@ const reducers = combineReducers({
 const middleware = applyMiddleware(promise() ,thunk ,logger);
 const store = createStore(reducers, middleware);
 
-store.subscribe(() => {
-  console.log("store change", store.getState())
-});
+
 //  Test
- fatchTodos(store);
- createTodos(store);
- deleteTodos(store);
+// store.subscribe(() => {
+//   console.log("store change", store.getState())
+// });
+ // fatchTodos(store);
+ // createTodos(store);
+ // deleteTodos(store);
 
 
 ReactDOM.render(

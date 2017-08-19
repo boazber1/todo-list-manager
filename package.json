@@ -12,6 +12,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^4.3.0",
     "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.71.4",
     "webpack": "^3.5.5"
   },
   "scripts": {
