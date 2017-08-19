@@ -10,6 +10,9 @@ import { fatchTodos , createTodos, deleteTodos } from "./tests/testRedusers"
 import logger from "redux-logger"
 import thunk from "redux-thunk"
 import promise from "redux-promise-middleware"
+import { login } from "./actions/userActions"
+import  Login  from "./Auth/Login"
+import 'semantic-ui-css/semantic.min.css';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -19,7 +22,6 @@ const reducers = combineReducers({
 const middleware = applyMiddleware(promise() ,thunk ,logger);
 const store = createStore(reducers, middleware);
 
-
 //  Test
 // store.subscribe(() => {
 //   console.log("store change", store.getState())
@@ -27,11 +29,13 @@ const store = createStore(reducers, middleware);
 // createTodos(store);
 // fatchTodos(store);
 // deleteTodos(store);
-
+// store.login = (data) => {
+  // store.dispatch(login(data));
+// }
 
 ReactDOM.render(
         <Provider store={store}>
-          <App />
+          <Login />
         </Provider>
   , document.getElementById('root'));
 registerServiceWorker();
