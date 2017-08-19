@@ -3,15 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from "react-redux"
 
-@connect((store) => {
-  console.log(store);
-  return {
-    todosState = store.todosState
-  };
-})
 class App extends Component {
 
   render() {
+    var todos = [];
+    if(this.props.todosState.todos)
+      var todos = this.props.todosState.todos.map((task, i) => {
+        return (<li>{task.task}</li>);
+      });
     return (
       <div className="App">
         <div className="App-header">
@@ -19,6 +18,9 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
+
+          <h1>todos count: {todos.length}</h1>
+          <ul>{todos}</ul>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
@@ -26,4 +28,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(store) {
+  console.log(store)
+  return {
+    todosState: store.todosState
+  }
+}
+
+export default connect(mapStateToProps)(App);

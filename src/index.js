@@ -24,9 +24,9 @@ const store = createStore(reducers, middleware);
 // store.subscribe(() => {
 //   console.log("store change", store.getState())
 // });
- // fatchTodos(store);
- // createTodos(store);
- // deleteTodos(store);
+// createTodos(store);
+// fatchTodos(store);
+// deleteTodos(store);
 
 
 ReactDOM.render(
