@@ -5,7 +5,7 @@ export default function setAuthororizationToken(token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${ token }`;
     }
     else {
-      delete axios.defaults.headers.common;
+      delete axios.defaults.headers.common["Authorization"];
     }
 
 }

@@ -12,7 +12,7 @@ export function* loginAsync(action) {
                                   , "http://todos.moonsite.co.il/api/login"
                                   , action.payload);
 
-      const token = data.token;
+      const token = data.token.split(" ")[1];
       setAuthorizationToken(token);
       yield put(loginSucceed(jwt_decode(token)));
 
