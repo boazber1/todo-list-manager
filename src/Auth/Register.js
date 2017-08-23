@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 
 class Register extends Component {
     render() {
-
+      return <h1> register </h1>
     }
 }
 
@@ -14,4 +14,4 @@ function mapStateToProps(store) {
   }
 }
 
-export default Login connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(Register);

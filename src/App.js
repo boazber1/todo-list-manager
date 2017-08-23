@@ -32,11 +32,7 @@ class App extends Component {
         </div>
         <button onClick={this.gotoLogin.bind(this)}>goto login</button>
         <div>
-        <Transition visible={this.vidible} animation='fade' duration={1500}>
-          <div>
-            {this.props.children}
-          </div>
-        </Transition>
+              {this.props.children}
         </div>
       </div>
     );

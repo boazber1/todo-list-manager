@@ -6,9 +6,11 @@ import {
   Dimmer,
   Loader,
   Image,
-  Segment
+  Segment,
+  Divider
 } from "semantic-ui-react"
-import {login} from "../actions/userActions"
+import { login } from "../actions/userActions"
+import { gotoRegister } from "../paths/pagesPaths"
 
 class Login extends React.Component {
 
@@ -29,6 +31,10 @@ class Login extends React.Component {
     this.password = e.target.value;
   }
 
+  onRegister(e) {
+    this.props.dispatch(gotoRegister());
+  }
+
   render() {
     return (
       <Segment>
@@ -46,7 +52,8 @@ class Login extends React.Component {
               <label>Password</label>
               <input placeholder="password..." type="password" onChange={this.onPasswordChange.bind(this)}/>
             </Form.Field>
-            <Button type="submit" onClick={this.onLogin.bind(this)}>Login</Button>
+              <Button type="submit" onClick={this.onLogin.bind(this)}>Login</Button>
+              <Button type="register" onClick={this.onRegister.bind(this)}>Register</Button>
           </Form>
         </div>
         <Image src='/assets/images/wireframe/short-paragraph.png'/>

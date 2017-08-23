@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 import { syncHistoryWithStore, routerReducer , routerMiddleware} from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from "redux"
@@ -12,6 +12,7 @@ import rootSaga from "./networkLayer/api-middleware"
 
 import App from './App';
 import  Login  from "./Auth/Login"
+import Register from "./Auth/Register"
 
 import { login } from "./actions/userActions"
 
@@ -41,7 +42,9 @@ ReactDOM.render(
           <Router history={history}>
 
             <Route path="/" component={App}>
+              <IndexRoute component={Login} />
               <Route path="login" component={Login} />
+              <Route path="register" component={Register} />
             </Route>
           </Router>
         </Provider>
