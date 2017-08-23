@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router'
 
+import { syncHistoryWithStore, routerReducer , routerMiddleware} from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { Provider } from "react-redux";
 import { userReducer, todoReducer } from "./reducers/todolistReduserces";
@@ -21,18 +23,27 @@ import 'semantic-ui-css/semantic.min.css';
 
 const reducers = combineReducers({
   user: userReducer,
-  todosState: todoReducer
+  todosState: todoReducer,
+  routing: routerReducer
 });
 
+const router = routerMiddleware(browserHistory);
 const sagaMiddleware = createSagaMiddleware();
-const middleware = applyMiddleware( sagaMiddleware ,logger );
+const middleware = applyMiddleware( sagaMiddleware ,logger, router );
 const store = createStore(reducers, middleware);
+const history = syncHistoryWithStore(browserHistory, store)
+
 
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
         <Provider store={store}>
-          <Login />
+          <Router history={history}>
+
+            <Route path="/" component={App}>
+              <Route path="login" component={Login} />
+            </Route>
+          </Router>
         </Provider>
   , document.getElementById('root'));
 registerServiceWorker();

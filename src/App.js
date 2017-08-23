@@ -3,7 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from "react-redux"
 
+import { gotoLogin } from "./paths/pagesPaths"
+import { Transition } from "semantic-ui-react"
 class App extends Component {
+
+  constructor() {
+    super();
+    this.vidible = false;
+  }
+
+  gotoLogin(e) {
+    this.props.dispatch(gotoLogin())
+    this.vidible = true;
+  }
 
   render() {
     var todos = [];
@@ -16,12 +28,16 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+
         </div>
-        <h1>todos count: {todos.length}</h1>
-        <ul>{todos}</ul>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <button onClick={this.gotoLogin.bind(this)}>goto login</button>
+        <div>
+        <Transition visible={this.vidible} animation='fade' duration={1500}>
+          <div>
+            {this.props.children}
+          </div>
+        </Transition>
+        </div>
       </div>
     );
   }
