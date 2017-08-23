@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 export function* loginAsync(action) {
   try {
-        const { data } = yield call(axios.post
+      const { data } = yield call(axios.post
                                   , "http://todos.moonsite.co.il/api/login"
                                   , action.payload);
 
