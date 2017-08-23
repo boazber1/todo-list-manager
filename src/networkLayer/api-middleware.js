@@ -5,15 +5,21 @@ import setAuthorizationToken from "../Auth/setAuthorizationToken"
 import { loginSucceed, loginFailed } from "../actions/userActions"
 import jwt_decode from "jwt-decode";
 
+
 export function* loginAsync(action) {
   try {
-      const { data } = yield call(axios.post, "http://todos.moonsite.co.il/api/login", action.payload);
+      ///more code
+      const { data } = yield call(axios.post
+                                  , "http://todos.moonsite.co.il/api/login"
+                                  , action.payload);
+
       const token = data.token;
       setAuthorizationToken(token);
-
       yield put(loginSucceed(jwt_decode(token)));
-  } catch (e) {
-      yield put(loginFailed(e));
+
+  } catch (error) {
+      setAuthorizationToken(null);
+      yield put(loginFailed(error));
   }
 }
 
