@@ -47,7 +47,7 @@ export const todoReducer = function (state = {}, action) {
         break;
       case "TODO_SET_FULFILLED":
         var { payload } = action
-        state = {...state, loading: false}
+        state = {...state, loading: false,  todos: state.todos.concat()}
         state.todos.push(payload);
         break;
       case "TODO_SET_REJECTED":
