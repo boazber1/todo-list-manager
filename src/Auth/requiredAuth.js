@@ -14,7 +14,7 @@ function requiredAuth(ComposedComponent) {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        if(!this.props.userState.user) {
+        if(!nextProps.userState.user) {
           this.props.dispatch(gotoLogin())
         }
     }

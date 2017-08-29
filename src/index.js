@@ -11,8 +11,9 @@ import createSagaMiddleware  from "redux-saga"
 import rootSaga from "./networkLayer/api-middleware"
 
 import App from './App';
-import  Login  from "./Auth/Login"
+import Login  from "./Auth/Login"
 import Register from "./Auth/Register"
+import TodoList from './todos/TodoList';
 import requiredAuth from "./Auth/requiredAuth"
 
 import { login } from "./actions/userActions"
@@ -46,6 +47,7 @@ ReactDOM.render(
               <IndexRoute component={Login} />
               <Route path="login" component={Login} />
               <Route path="register" component={Register} />
+              <Route path="todo-list" component={requiredAuth(TodoList)} />
             </Route>
           </Router>
         </Provider>

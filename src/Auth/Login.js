@@ -10,10 +10,14 @@ import {
   Message
 } from "semantic-ui-react"
 import { login } from "../actions/userActions"
-import { gotoRegister } from "../paths/pagesPaths"
+import { gotoRegister,  gotoTodoManager } from "../paths/pagesPaths"
 
 class Login extends React.Component {
-
+  componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
+    if(nextProps.userSate.user)
+      this.props.dispatch(gotoTodoManager())
+  }
   onLogin(e) {
     const data = {
       email: this.email,
@@ -38,7 +42,7 @@ class Login extends React.Component {
   render() {
     return (
       <Segment>
-        <Dimmer active={this.props.user.loading}>
+        <Dimmer active={this.props.userSate.loading}>
           <Loader>Loading</Loader>
         </Dimmer>
         <div>
@@ -57,7 +61,7 @@ class Login extends React.Component {
           </Form>
           <Message>
             <div>
-              {this.props.user.message}
+              {this.props.userSate.message}
             </div>
             New to us ?  <Button type="register" onClick={this.onRegister.bind(this)}>Register</Button>
           </Message>
@@ -70,6 +74,6 @@ class Login extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {user: state.user};
+  return {userSate: state.user};
 }
 export default connect(mapStateToProps)(Login)

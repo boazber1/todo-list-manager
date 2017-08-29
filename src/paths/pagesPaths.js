@@ -7,3 +7,7 @@ export function gotoLogin() {
 export function gotoRegister() {
   return push("/register");
 }
+
+export function gotoTodoManager() {
+  return push("/todo-list");
+}
