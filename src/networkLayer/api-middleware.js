@@ -5,7 +5,7 @@ import setAuthorizationToken from "../Auth/setAuthorizationToken"
 import { loginSucceed, loginFailed
       , registerSucceed, registerFailed} from "../actions/userActions"
 import jwt_decode from "jwt-decode";
-
+import { getTodoSucceed, getTodoFailed, createTodoSucceed, createTodoFailed } from '../actions/todolistActions';
 
 
 
@@ -46,6 +46,38 @@ export function* watchUserAuth () {
   yield takeEvery("USER_REGISTER_PENDING", registerAsync);
 }
 
+
+export function* getTodosAsync(action) {
+  try {
+    const { data } = yield call(axios.get
+                              , "http://todos.moonsite.co.il/api/tasks"
+                          );
+    console.log(data);
+    const { tasks } = data
+    yield put(getTodoSucceed(tasks));
+  } catch (e) {
+    yield put(getTodoFailed(e));
+  }
+}
+
+export function* createTodosAsync(action) {
+  try {
+    const { data } = yield call(axios.post
+                              , "http://todos.moonsite.co.il/api/tasks"
+                              , action.payload
+                            );
+    const { task } = data;
+    yield put(createTodoSucceed(task))
+  } catch (e) {
+    yield put(createTodoFailed(e))
+  }
+}
+
+export function* watchTodos() {
+    yield takeEvery("TODO_FATCH_PENDING", getTodosAsync);
+    yield takeEvery("TODO_CREATE_PENDING", createTodosAsync);
+}
+
 export default function* rootSaga() {
-    yield [ watchUserAuth(), ];
+    yield [ watchUserAuth(), watchTodos(), ];
 }
