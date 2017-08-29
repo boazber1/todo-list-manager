@@ -41,11 +41,11 @@ export function* registerAsync(action) {
   }
 }
 
-export function* watchLogin () {
+export function* watchUserAuth () {
   yield takeEvery("USER_LOGIN_PENDING", loginAsync);
   yield takeEvery("USER_REGISTER_PENDING", registerAsync);
 }
 
 export default function* rootSaga() {
-    yield [ watchLogin(), ];
+    yield [ watchUserAuth(), ];
 }

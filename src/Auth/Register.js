@@ -52,9 +52,9 @@ class Register extends Component {
                 <label>Password</label>
                 <input placeholder="password..." type="password" onChange={this.onPasswordChange.bind(this)}/>
               </Form.Field>
-              <Button type="submit" onClick={this.onRegister.bind(this)}>Login</Button>
+              <Button type="submit" onClick={this.onRegister.bind(this)}>Register</Button>
             </Form>
-          <div>
+          </div>
           <Image src='/assets/images/wireframe/short-paragraph.png'/>
         </Segment>
       );

@@ -4,33 +4,63 @@ import './App.css';
 import { connect } from "react-redux"
 
 import { gotoLogin } from "./paths/pagesPaths"
-import { Transition } from "semantic-ui-react"
+import { Menu } from "semantic-ui-react"
+import { logout } from './actions/userActions';
 class App extends Component {
 
   constructor() {
     super();
-    this.vidible = false;
   }
 
   gotoLogin(e) {
     this.props.dispatch(gotoLogin())
-    this.vidible = true;
+  }
+
+  handleMenu(e, {name}) {
+    switch (name) {
+      case "login":
+        this.props.dispatch(gotoLogin())
+        break;
+      case "logout":
+        this.props.dispatch(logout())
+      default:
+
+    }
   }
 
   render() {
-    var todos = [];
-    if(this.props.todosState.todos)
-      var todos = this.props.todosState.todos.map((task, i) => {
-        return (<li>{task.task}</li>);
-      });
+    // var todos = [];
+    // if(this.props.todosState.todos)
+      // var todos = this.props.todosState.todos.map((task, i) => {
+        // return (<li>{task.task}</li>);
+      // });
+
+
+
+
+
+      var menuItem = (
+        <Menu.Item name="logout"
+                   onClick={this.handleMenu.bind(this)}>
+          Logout
+        </Menu.Item>
+      );
+      if(!this.props.userState.user){
+          menuItem = (
+            <Menu.Item name="login"
+                       onClick={this.handleMenu.bind(this)}>
+            Login
+          </Menu.Item>
+        );
+      }
+
+
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-
-        </div>
-        <button onClick={this.gotoLogin.bind(this)}>goto login</button>
+        <Menu>
+          {menuItem}
+        </Menu>
         <div>
               {this.props.children}
         </div>
@@ -41,7 +71,7 @@ class App extends Component {
 
 function mapStateToProps(store) {
   return {
-    todosState: store.todosState
+    userState: store.user
   }
 }
 

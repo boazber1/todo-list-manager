@@ -17,6 +17,9 @@ export const userReducer = function (state = {}, action) {
         var { payload } = action;
         state = {...state, loading: false, message: "Error during log in process " + payload }
         break;
+      case "USER_LOGOUT":
+        state = {...state, user: null}
+        break;
     }
     return state;
 }
