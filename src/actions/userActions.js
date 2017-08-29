@@ -10,3 +10,16 @@ export function loginSucceed(userData) {
 export function loginFailed(errorData) {
   return {type: "USER_LOGIN_REJECTED", payload: errorData};
 }
+
+
+export function register(registerData) {
+  return {type: "USER_REGISTER_PENDING", payload: registerData};
+}
+
+export function registerSucceed(userData) {
+  return {type: "USER_REGISTER_FULFILLED", payload: userData};
+}
+
+export function registerFailed(errorData) {
+  return {type: "USER_REGISTER_REJECTED", payload: errorData};
+}

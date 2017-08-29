@@ -13,6 +13,7 @@ import rootSaga from "./networkLayer/api-middleware"
 import App from './App';
 import  Login  from "./Auth/Login"
 import Register from "./Auth/Register"
+import requiredAuth from "./Auth/requiredAuth"
 
 import { login } from "./actions/userActions"
 
