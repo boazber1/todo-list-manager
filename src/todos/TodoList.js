@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Segment, Header, Card, Dimmer, Loader, Portal, Icon, Button, Form} from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getTodos, createTodo} from '../actions/todolistActions';
+import { getTodos, createTodo, deleteTodo} from '../actions/todolistActions';
+import Todo from './Todo';
 
 class TodoList extends Component {
 
@@ -30,8 +31,26 @@ class TodoList extends Component {
     this.props.dispatch(createTodo(data));
   }
 
+  onTodoDelete(id) {
+    this.props.dispatch(deleteTodo(id));
+  }
+
   render() {
-    //TODO: TodoLogic
+
+    let todos = [];
+    if(this.props.todosState.todos) {
+      todos = this.props.todosState.todos.map((todo, i) => {
+        return (
+          <Todo created_at={todo.created_at}
+                updated_at={todo.updated_at}
+                task={todo.task}
+                id={todo._id}
+                delete={this.onTodoDelete.bind(this)}
+                key={i}
+                />
+        );
+      });
+    }
 
     return (
 
@@ -42,6 +61,7 @@ class TodoList extends Component {
         <Dimmer active={this.props.todosState.loading}>
           <Loader>Loading</Loader>
         </Dimmer>
+
         <Portal
             closeOnTriggerClick
             openOnTriggerClick
@@ -65,7 +85,7 @@ class TodoList extends Component {
             </Segment>
           </Portal>
         <Card.Group>
-
+          { todos }
         </Card.Group>
       </Segment>
 

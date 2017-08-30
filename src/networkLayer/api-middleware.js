@@ -5,7 +5,7 @@ import setAuthorizationToken from "../Auth/setAuthorizationToken"
 import { loginSucceed, loginFailed
       , registerSucceed, registerFailed} from "../actions/userActions"
 import jwt_decode from "jwt-decode";
-import { getTodoSucceed, getTodoFailed, createTodoSucceed, createTodoFailed } from '../actions/todolistActions';
+import { getTodoSucceed, getTodoFailed, createTodoSucceed, createTodoFailed, deleteTodoSucceed, deleteTodoFailed } from '../actions/todolistActions';
 
 
 
@@ -73,9 +73,22 @@ export function* createTodosAsync(action) {
   }
 }
 
+export function* deleteTodosAsync(action) {
+  try {
+    const { data } = yield call(axios.delete
+                                , "http://todos.moonsite.co.il/api/tasks/" + action.payload.id);
+    yield put(deleteTodoSucceed(action.payload));
+  } catch(e) {
+    yield put(deleteTodoFailed(e));
+  }
+
+
+}
+
 export function* watchTodos() {
     yield takeEvery("TODO_FATCH_PENDING", getTodosAsync);
     yield takeEvery("TODO_CREATE_PENDING", createTodosAsync);
+    yield takeEvery("TODO_DELETE_PENDING", deleteTodosAsync);
 }
 
 export default function* rootSaga() {

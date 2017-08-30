@@ -21,3 +21,15 @@ export function createTodoSucceed(todo) {
 export function createTodoFailed(error) {
   return {type: "TODO_CREATE_REJECTED", payload: error};
 }
+
+export function deleteTodo(id) {
+  return {type: "TODO_DELETE_PENDING", payload: id };
+}
+
+export function deleteTodoSucceed(id) {
+  return {type: "TODO_DELETE_FULFILLED", payload: id};
+}
+
+export function deleteTodoFailed(error) {
+  return {type: "TODO_DELETE_REJECTED", payload: error };
+}

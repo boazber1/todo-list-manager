@@ -67,7 +67,7 @@ export const todoReducer = function (state = {}, action) {
       case "TODO_DELETE_FULFILLED":
         var { payload } = action;
         state = {...state, loading: false, todos: state.todos.filter((row) => {
-          return row.id !== payload;
+          return row._id !== payload.id;
         })};
         break;
       case "TODO_DELETE_REJECTED":
