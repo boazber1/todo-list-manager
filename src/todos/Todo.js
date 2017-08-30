@@ -5,7 +5,7 @@ import dateformat from 'dateformat';
 class Todo extends Component {
   constructor() {
     super();
-    this.state = {  IsEditMode: false };
+    this.state = {  isEditMode: false };
   }
 
   onDelete(e) {
@@ -13,7 +13,7 @@ class Todo extends Component {
   }
 
   onEdit(e) {
-    this.setState({...this.state, task: this.props.task, IsEditMode: true})
+    this.setState({...this.state, task: this.props.task, isEditMode: true})
   }
 
   onTaskCange(e) {
@@ -21,11 +21,17 @@ class Todo extends Component {
   }
 
   onCancel(e) {
-    this.setState({ IsEditMode: false });
+    this.setState({ isEditMode: false });
   }
 
   onSave(e) {
-
+    const data = {
+      id: this.props.id,
+      task: this.state.task,
+      order: this.props.order
+    }
+    this.props.save(data);
+    this.setState({...this.state, isEditMode: false});
   }
 
   render() {
@@ -43,13 +49,13 @@ class Todo extends Component {
 
 
 
-    if(this.state.IsEditMode) {
+    if(this.state.isEditMode) {
       taskElement = (
         <input value={this.state.task} onChange={this.onTaskCange.bind(this)}/>
       );
       buttons = (
         <div className='ui two buttons'>
-          <Button basic color='green' onClick={this.onEdit.bind(this)}>Save</Button>
+          <Button basic color='green' onClick={this.onSave.bind(this)}>Save</Button>
           <Button basic color='red' onClick={this.onCancel.bind(this)}>Cancel</Button>
         </div>
       );
@@ -59,11 +65,11 @@ class Todo extends Component {
       <Card>
         <Card.Content>
           <Card.Header>
-            Created: {dateformat(this.props.created_at,"dd/mm/yy HH:mm")}
+            Created: {dateformat(this.props.created_at,"dd/mm/yy HH:MM")}
           </Card.Header>
           <Card.Meta>
             <div>
-              Modified: {dateformat(this.props.updated_at,"dd/mm/yy HH:mm")}
+              Modified: {dateformat(this.props.updated_at,"dd/mm/yy HH:MM")}
             </div>
           </Card.Meta>
           <Card.Description>

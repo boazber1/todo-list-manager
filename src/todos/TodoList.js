@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Header, Card, Dimmer, Loader, Portal, Icon, Button, Form} from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getTodos, createTodo, deleteTodo} from '../actions/todolistActions';
+import { getTodos, createTodo, deleteTodo, saveTodo} from '../actions/todolistActions';
 import Todo from './Todo';
 
 class TodoList extends Component {
@@ -11,7 +11,6 @@ class TodoList extends Component {
       this.props.dispatch(getTodos());
     }
   }
-
 
 
   onTaskChange(e) {
@@ -35,6 +34,10 @@ class TodoList extends Component {
     this.props.dispatch(deleteTodo(id));
   }
 
+  onTodoSave(data) {
+    this.props.dispatch(saveTodo(data));
+  }
+
   render() {
 
     let todos = [];
@@ -45,7 +48,9 @@ class TodoList extends Component {
                 updated_at={todo.updated_at}
                 task={todo.task}
                 id={todo._id}
+                order={todo.order}
                 delete={this.onTodoDelete.bind(this)}
+                save={this.onTodoSave.bind(this)}
                 key={i}
                 />
         );

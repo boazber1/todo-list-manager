@@ -54,7 +54,9 @@ export const todoReducer = function (state = {}, action) {
         break;
       case "TODO_SET_FULFILLED":
         var { payload } = action
-        state = {...state, loading: false,  todos: state.todos.concat()}
+        state = {...state, loading: false,  todos: state.todos.filter((row) => {
+                                                  return row._id !== payload._id;
+                                                })};
         state.todos.push(payload);
         break;
       case "TODO_SET_REJECTED":
@@ -67,8 +69,8 @@ export const todoReducer = function (state = {}, action) {
       case "TODO_DELETE_FULFILLED":
         var { payload } = action;
         state = {...state, loading: false, todos: state.todos.filter((row) => {
-          return row._id !== payload.id;
-        })};
+                                                  return row._id !== payload.id;
+                                                })};
         break;
       case "TODO_DELETE_REJECTED":
         var { payload } = action;

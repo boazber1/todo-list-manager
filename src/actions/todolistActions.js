@@ -33,3 +33,15 @@ export function deleteTodoSucceed(id) {
 export function deleteTodoFailed(error) {
   return {type: "TODO_DELETE_REJECTED", payload: error };
 }
+
+export function saveTodo(todoData) {
+  return {type: "TODO_SET_PENDING", payload: todoData};
+}
+
+export function saveTodoSucceed(todoData) {
+  return {type: "TODO_SET_FULFILLED", payload: todoData};
+}
+
+export function saveTodoFailed(error) {
+  return {type: "TODO_SET_REJECTED", payload: error};
+}
