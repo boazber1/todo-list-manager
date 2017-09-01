@@ -12,11 +12,9 @@ class App extends Component {
     super();
   }
 
-  gotoLogin(e) {
-    this.props.dispatch(gotoLogin())
-  }
 
-  handleMenu(e, {name}) {
+
+  handleMenu = (e, {name}) => {
     switch (name) {
       case "login":
         this.props.dispatch(gotoLogin())
@@ -41,11 +39,11 @@ class App extends Component {
 
       var menuItem = (
         <Menu.Item name="logout"
-                   onClick={this.handleMenu.bind(this)}>
+                   onClick={this.handleMenu}>
           Logout
         </Menu.Item>
       );
-      if(!this.props.userState.user){
+      if(!this.props.authenticated){
           menuItem = (
             <Menu.Item name="login"
                        onClick={this.handleMenu.bind(this)}>
@@ -71,7 +69,7 @@ class App extends Component {
 
 function mapStateToProps(store) {
   return {
-    userState: store.user
+    authenticated: store.session.authenticated
   }
 }
 

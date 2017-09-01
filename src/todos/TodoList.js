@@ -13,15 +13,15 @@ class TodoList extends Component {
   }
 
 
-  onTaskChange(e) {
+  onTaskChange = (e) =>  {
     this.newTask = e.target.value;
   }
 
-  onPriorityChange(e) {
+  onPriorityChange = (e) => {
     this.newPriority = e.target.value;
   }
 
-  onCreateNewTast(e) {
+  onCreateNewTask = (e) => {
     const data  = {
         task: this.newTask,
         order: parseInt(this.newPriority)
@@ -30,11 +30,11 @@ class TodoList extends Component {
     this.props.dispatch(createTodo(data));
   }
 
-  onTodoDelete(id) {
+  onTodoDelete = (id) =>  {
     this.props.dispatch(deleteTodo(id));
   }
 
-  onTodoSave(data) {
+  onTodoSave = (data) =>  {
     this.props.dispatch(saveTodo(data));
   }
 
@@ -49,8 +49,8 @@ class TodoList extends Component {
                 task={todo.task}
                 id={todo._id}
                 order={todo.order}
-                delete={this.onTodoDelete.bind(this)}
-                save={this.onTodoSave.bind(this)}
+                delete={this.onTodoDelete}
+                save={this.onTodoSave}
                 key={i}
                 />
         );
@@ -78,13 +78,13 @@ class TodoList extends Component {
               <Form>
                 <Form.Field>
                   <label>Task</label>
-                  <input placeholder="Task..." onChange={this.onTaskChange.bind(this)}/>
+                  <input placeholder="Task..." onChange={this.onTaskChange}/>
                 </Form.Field>
                 <Form.Field>
                   <label>Priority</label>
-                  <input placeholder="Priority..." onChange={this.onPriorityChange.bind(this)}/>
+                  <input placeholder="Priority..." onChange={this.onPriorityChange}/>
                 </Form.Field>
-                <Button fluid type="submit" onClick={this.onCreateNewTast.bind(this)}>Create</Button>
+                <Button fluid type="submit" onClick={this.onCreateNewTask}>Create</Button>
 
               </Form>
             </Segment>

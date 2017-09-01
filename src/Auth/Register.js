@@ -20,7 +20,7 @@ class Register extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-      if(nextProps.userSate.user)
+      if(nextProps.userSate.authenticated)
         this.props.dispatch(gotoTodoManager())
     }
 
@@ -44,7 +44,7 @@ class Register extends Component {
     render() {
       return (
         <Segment>
-          <Dimmer active={this.props.user.loading}>
+          <Dimmer active={this.props.authenticated.loading}>
             <Loader>Loading</Loader>
           </Dimmer>
           <div>
@@ -69,7 +69,7 @@ class Register extends Component {
 
 function mapStateToProps(store) {
   return {
-    user: store.user
+    authenticated: store.authenticated
   }
 }
 

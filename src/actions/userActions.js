@@ -1,4 +1,5 @@
 import setAuthorizationToken from "../Auth/setAuthorizationToken"
+import { sessionService } from "redux-react-session"
 
 export function login(loginData) {
     return {type: "USER_LOGIN_PENDING", payload: loginData};
@@ -14,6 +15,8 @@ export function loginFailed(errorData) {
 
 export function logout() {
   setAuthorizationToken(null);
+  sessionService.deleteSession();
+  sessionService.deleteUser();
   return {type: "USER_LOGOUT"}
 }
 

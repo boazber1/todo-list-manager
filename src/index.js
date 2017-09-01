@@ -9,6 +9,7 @@ import { userReducer, todoReducer } from "./reducers/todolistReduserces";
 import logger from "redux-logger"
 import createSagaMiddleware  from "redux-saga"
 import rootSaga from "./networkLayer/api-middleware"
+import {sessionService, sessionReducer } from "redux-react-session"
 
 import App from './App';
 import Login  from "./Auth/Login"
@@ -24,18 +25,18 @@ import 'semantic-ui-css/semantic.min.css';
 const reducers = combineReducers({
   user: userReducer,
   todosState: todoReducer,
-  routing: routerReducer
+  routing: routerReducer,
+  session: sessionReducer
 });
 
 const router = routerMiddleware(browserHistory);
 const sagaMiddleware = createSagaMiddleware();
 const middleware = applyMiddleware( sagaMiddleware ,logger, router );
 const store = createStore(reducers, middleware);
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(browserHistory, store);
 
-
+sessionService.initSessionService(store, { driver: 'COOKIES' });
 sagaMiddleware.run(rootSaga);
-
 
 ReactDOM.render(
         <Provider store={store}>
