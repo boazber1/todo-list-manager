@@ -26,7 +26,7 @@ export function* loginAsync(action) {
 
       const token = data.token.split(" ")[1];
       setAuthorizationToken(token);
-      yield put(loginSucceed(jwt_decode(token)));
+      yield put(loginSucceed({...jwt_decode(token), token}));
 
   } catch (error) {
       setAuthorizationToken(null);
@@ -42,7 +42,7 @@ export function* registerAsync(action) {
 
       const token = data.token.split(" ")[1];
       setAuthorizationToken(token);
-      yield put(registerSucceed(jwt_decode(token)));
+      yield put(registerSucceed({...jwt_decode(token), token}));
 
   } catch (error) {
       setAuthorizationToken(null);

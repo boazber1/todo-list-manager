@@ -29,6 +29,7 @@
     "redux-promise-middleware": "^4.3.0",
     "redux-react-session": "^2.1.0",
     "redux-saga": "^0.15.6",
+    "redux-session": "^1.0.3",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.71.4",

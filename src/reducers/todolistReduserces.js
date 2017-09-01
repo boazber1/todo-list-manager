@@ -2,7 +2,10 @@ export const userReducer = function (state = {}, action) {
     var { type } = action;
 
     switch (type) {
-
+      case "LOAD_STORED_STATE":
+        const { user } = action.storedState
+        state = user;
+        break;
       case "USER_REGISTER_PENDING":
       case "USER_LOGIN_PENDING":
         state = {...state, loading: true};

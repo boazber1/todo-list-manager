@@ -18,6 +18,10 @@ export function logout() {
   return {type: "USER_LOGOUT"}
 }
 
+export function dropSession() {
+  return {type: "DROP_SESSION_DATA"};
+}
+
 export function register(registerData) {
   return {type: "USER_REGISTER_PENDING", payload: registerData};
 }

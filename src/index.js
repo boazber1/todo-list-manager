@@ -5,9 +5,13 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer , routerMiddleware} from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { Provider } from "react-redux";
-import { userReducer, todoReducer } from "./reducers/todolistReduserces";
+import { userReducer, todoReducer} from "./reducers/todolistReduserces";
+import setAuthorizationToken from "./Auth/setAuthorizationToken"
+
+
 import logger from "redux-logger"
 import createSagaMiddleware  from "redux-saga"
+import { createSession } from 'redux-session';
 import rootSaga from "./networkLayer/api-middleware"
 
 import App from './App';
@@ -29,7 +33,23 @@ const reducers = combineReducers({
 
 const router = routerMiddleware(browserHistory);
 const sagaMiddleware = createSagaMiddleware();
-const middleware = applyMiddleware( sagaMiddleware ,logger, router );
+
+const session = createSession({
+  ns: 'todoListManager',
+  clearStorage (action) {
+      return action.type === 'DROP_SESSION_DATA';
+    },
+    onLoad (storedState, dispatch) {
+      if (storedState.user.user) {
+        const token = storedState.user.user.token;
+        setAuthorizationToken(token)
+      }
+
+      dispatch({ type: 'LOAD_STORED_STATE', storedState })
+    }
+  });
+
+const middleware = applyMiddleware( sagaMiddleware ,logger, router, session);
 const store = createStore(reducers, middleware);
 const history = syncHistoryWithStore(browserHistory, store);
 

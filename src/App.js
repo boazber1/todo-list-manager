@@ -5,24 +5,25 @@ import { connect } from "react-redux"
 
 import { gotoLogin } from "./paths/pagesPaths"
 import { Menu } from "semantic-ui-react"
-import { logout } from './actions/userActions';
+import { logout, dropSession } from './actions/userActions';
 class App extends Component {
 
   constructor() {
     super();
   }
 
-  gotoLogin(e) {
+  gotoLogin = (e) => {
     this.props.dispatch(gotoLogin())
   }
 
-  handleMenu(e, {name}) {
+  handleMenu = (e, {name}) =>  {
     switch (name) {
       case "login":
-        this.props.dispatch(gotoLogin())
+        this.props.dispatch(gotoLogin());
         break;
       case "logout":
-        this.props.dispatch(logout())
+        this.props.dispatch(logout());
+        this.props.dispatch(dropSession());
       default:
 
     }
@@ -41,14 +42,14 @@ class App extends Component {
 
       var menuItem = (
         <Menu.Item name="logout"
-                   onClick={this.handleMenu.bind(this)}>
+                   onClick={this.handleMenu}>
           Logout
         </Menu.Item>
       );
       if(!this.props.userState.user){
           menuItem = (
             <Menu.Item name="login"
-                       onClick={this.handleMenu.bind(this)}>
+                       onClick={this.handleMenu}>
             Login
           </Menu.Item>
         );
