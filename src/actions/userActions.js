@@ -15,8 +15,6 @@ export function loginFailed(errorData) {
 
 export function logout() {
   setAuthorizationToken(null);
-  sessionService.deleteSession();
-  sessionService.deleteUser();
   return {type: "USER_LOGOUT"}
 }
 

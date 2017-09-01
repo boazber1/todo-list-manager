@@ -16,7 +16,6 @@ import {
   saveTodoFailed
 } from '../actions/todolistActions';
 
-import { sessionService } from "redux-react-session"
 
 
 export function* loginAsync(action) {
@@ -27,12 +26,8 @@ export function* loginAsync(action) {
 
       const token = data.token.split(" ")[1];
       setAuthorizationToken(token);
-      let user = jwt_decode(token);
+      yield put(loginSucceed(jwt_decode(token)));
 
-      sessionService.saveSession({ token });
-      sessionService.saveUser({...user, token});
-
-      yield put(loginSucceed(user));
   } catch (error) {
       setAuthorizationToken(null);
       yield put(loginFailed(error));
@@ -67,7 +62,7 @@ export function* getTodosAsync(action) {
                               , "http://todos.moonsite.co.il/api/tasks"
                           );
     console.log(data);
-    const { tasks } = data;
+    const { tasks } = data
     yield put(getTodoSucceed(tasks));
   } catch (e) {
     yield put(getTodoFailed(e));

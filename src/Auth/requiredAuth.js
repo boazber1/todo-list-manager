@@ -1,34 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { gotoLogin } from "../paths/pagesPaths"
-import setAuthorizationToken ,{ getAuthorizationToken } from "../Auth/setAuthorizationToken"
-import { sessionService } from "redux-react-session"
+import { getAuthorizationToken } from "../Auth/setAuthorizationToken"
+import jwt_decode from "jwt-decode";
+import { loginSucceed } from "../actions/userActions"
 
 
 function requiredAuth(ComposedComponent) {
 
   class RequiredAuth extends React.Component {
 
-    // componentWillReceiveProps(nextProps) {
-    // }
+    componentWillMount() {
+        if(!this.props.userState.user) {
+          this.props.dispatch(gotoLogin());
+        }
+    }
 
     componentWillUpdate(nextProps, nextState) {
-        if(!nextProps.session.authenticated) {
+        if(!nextProps.userState.user) {
           this.props.dispatch(gotoLogin())
         }
     }
 
     render() {
-      console.log(this.props.session);
-      if(!this.props.session.authenticated) {
-        this.props.dispatch(gotoLogin());
-      }
-      else {
-        if(!getAuthorizationToken() && this.props.session.user.token) {
-          setAuthorizationToken(this.props.session.user.token)
-        }
-      }
-
       return (
           <ComposedComponent {...this.props} />
       );
@@ -37,7 +31,7 @@ function requiredAuth(ComposedComponent) {
 
   function mapStateToProps(state) {
     return {
-      session : state.session
+      userState : state.user
     }
   }
 
