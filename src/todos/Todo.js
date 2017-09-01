@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, TextArea } from 'semantic-ui-react';
 import dateformat from 'dateformat';
 
 class Todo extends Component {
-  constructor() {
+  constructor () {
     super();
     this.state = {  isEditMode: false };
   }
 
-  onDelete(e) {
+  onDelete = (e) => {
     this.props.delete({id: this.props.id})
   }
 
-  onEdit(e) {
+  onEdit = (e) => {
     this.setState({...this.state, task: this.props.task, isEditMode: true})
   }
 
-  onTaskCange(e) {
+  onTaskChange = (e) => {
     this.setState({...this.state, task: e.target.value});
   }
 
-  onCancel(e) {
+  onCancel = (e) => {
     this.setState({ isEditMode: false });
   }
 
-  onSave(e) {
+  onSave = (e) => {
     const data = {
       id: this.props.id,
       task: this.state.task,
@@ -36,14 +36,14 @@ class Todo extends Component {
 
   render() {
     let taskElement = (
-      <p>
+      <p style={{width: '18.5rem', wordBreak: 'break-all'}}>
         {this.props.task}
       </p>
     );
     let buttons = (
       <div className='ui two buttons'>
-        <Button basic color='green' onClick={this.onEdit.bind(this)}>Edit</Button>
-        <Button basic color='red' onClick={this.onDelete.bind(this)}>Delete</Button>
+        <Button basic color='green' onClick={this.onEdit}>Edit</Button>
+        <Button basic color='red' onClick={this.onDelete}>Delete</Button>
       </div>
     );
 
@@ -51,12 +51,12 @@ class Todo extends Component {
 
     if(this.state.isEditMode) {
       taskElement = (
-        <input value={this.state.task} onChange={this.onTaskCange.bind(this)}/>
+        <TextArea onChange={this.onTaskChange} rows={3} value={this.state.task} />
       );
       buttons = (
         <div className='ui two buttons'>
-          <Button basic color='green' onClick={this.onSave.bind(this)}>Save</Button>
-          <Button basic color='red' onClick={this.onCancel.bind(this)}>Cancel</Button>
+          <Button basic color='green' onClick={this.onSave}>Save</Button>
+          <Button basic color='red' onClick={this.onCancel}>Cancel</Button>
         </div>
       );
     }

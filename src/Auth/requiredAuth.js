@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { gotoLogin } from "../paths/pagesPaths"
+import { getAuthorizationToken } from "../Auth/setAuthorizationToken"
+import jwt_decode from "jwt-decode";
+import { loginSucceed } from "../actions/userActions"
+
 
 function requiredAuth(ComposedComponent) {
 
@@ -10,7 +14,6 @@ function requiredAuth(ComposedComponent) {
         if(!this.props.userState.user) {
           this.props.dispatch(gotoLogin());
         }
-
     }
 
     componentWillUpdate(nextProps, nextState) {

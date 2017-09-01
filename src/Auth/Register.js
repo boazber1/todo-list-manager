@@ -10,6 +10,7 @@ import {
   Message
 } from "semantic-ui-react"
 import { register } from "../actions/userActions"
+import { gotoTodoManager } from "../paths/pagesPaths"
 
 class Register extends Component {
     constructor() {
@@ -18,7 +19,12 @@ class Register extends Component {
       this.password = "";
     }
 
-    onRegister(e) {
+    componentWillUpdate(nextProps, nextState) {
+      if(nextProps.userSate.user)
+        this.props.dispatch(gotoTodoManager())
+    }
+
+    onRegister = (e) => {
       const data = {
           email: this.email,
           password: this.password
@@ -27,11 +33,11 @@ class Register extends Component {
       this.props.dispatch(register(data));
     }
 
-    onEmailChange(e) {
+    onEmailChange = (e) => {
       this.email = e.target.value;
     }
 
-    onPasswordChange(e) {
+    onPasswordChange = (e) =>  {
       this.password = e.target.value;
     }
 
@@ -46,13 +52,13 @@ class Register extends Component {
             <Form>
               <Form.Field>
                 <label>Email</label>
-                <input placeholder="Email...." onChange={this.onEmailChange.bind(this)}/>
+                <input placeholder="Email...." onChange={this.onEmailChange}/>
               </Form.Field>
               <Form.Field>
                 <label>Password</label>
-                <input placeholder="password..." type="password" onChange={this.onPasswordChange.bind(this)}/>
+                <input placeholder="password..." type="password" onChange={this.onPasswordChange}/>
               </Form.Field>
-              <Button type="submit" onClick={this.onRegister.bind(this)}>Register</Button>
+              <Button type="submit" onClick={this.onRegister}>Register</Button>
             </Form>
           </div>
           <Image src='/assets/images/wireframe/short-paragraph.png'/>

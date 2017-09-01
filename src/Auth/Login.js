@@ -18,7 +18,7 @@ class Login extends React.Component {
     if(nextProps.userSate.user)
       this.props.dispatch(gotoTodoManager())
   }
-  onLogin(e) {
+  onLogin = (e) => {
     const data = {
       email: this.email,
       password: this.password
@@ -27,15 +27,15 @@ class Login extends React.Component {
     this.props.dispatch(login(data));
   }
 
-  onEmailChange(e) {
+  onEmailChange = (e) =>  {
     this.email = e.target.value;
   }
 
-  onPasswordChange(e) {
+  onPasswordChange = (e) =>  {
     this.password = e.target.value;
   }
 
-  onRegister(e) {
+  onRegister = (e) =>  {
     this.props.dispatch(gotoRegister());
   }
 
@@ -50,20 +50,20 @@ class Login extends React.Component {
           <Form>
             <Form.Field>
               <label>Email</label>
-              <input placeholder="Email...." onChange={this.onEmailChange.bind(this)}/>
+              <input placeholder="Email...." onChange={this.onEmailChange}/>
             </Form.Field>
             <Form.Field>
               <label>Password</label>
-              <input placeholder="password..." type="password" onChange={this.onPasswordChange.bind(this)}/>
+              <input placeholder="password..." type="password" onChange={this.onPasswordChange}/>
             </Form.Field>
-              <Button type="submit" onClick={this.onLogin.bind(this)}>Login</Button>
+              <Button type="submit" onClick={this.onLogin}>Login</Button>
 
           </Form>
           <Message>
             <div>
               {this.props.userSate.message}
             </div>
-            New to us ?  <Button type="register" onClick={this.onRegister.bind(this)}>Register</Button>
+            New to us ?  <Button type="register" onClick={this.onRegister}>Register</Button>
           </Message>
         </div>
         <Image src='/assets/images/wireframe/short-paragraph.png'/>

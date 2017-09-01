@@ -16,9 +16,6 @@ import Register from "./Auth/Register"
 import TodoList from './todos/TodoList';
 import requiredAuth from "./Auth/requiredAuth"
 
-import { login } from "./actions/userActions"
-
-import { fatchTodos , createTodos, deleteTodos } from "./tests/testRedusers"
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -38,6 +35,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 
 sagaMiddleware.run(rootSaga);
+
 
 ReactDOM.render(
         <Provider store={store}>
